@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Создание заявки";
+}
+<h3>Создание заявки</h3>
+<div class="row">
+    <br /><br />
+          <form method="post" action="@Url.Action("CreateOrAddResult")">
+              
+              <div class="form-group">
+                  <p>
+                      <b>Название:</b>
+                      <input class="form-control" type="text" required name="FieldName" placeholder="Название" maxlength="50" />
+                  </p>
+                  <p>
+                      <b>Выберите приложение:</b>
+                      <br /><select class="form-control" required name="ApplicationId">
+                          @foreach (var value in ViewBag.Applications)
+                          {
+                              <option value="@value.ApplicationId">@value.Name</option>
+                          }
+                      </select>
+                  </p>
+                  <p>
+                      <b>Дата окончания разработки:</b>
+                      <input class="form-control" type="date" min="2000-01-01" max="2100-01-01" required name="DevEndDate" placeholder="31.01.2020" />
+                  </p>
+                  <p>
+                      <b>Описание:</b>
+                      <input class="form-control" type="text" required name="Description" placeholder="Подробное описание заявки" maxlength="100" />
+                  </p>
+                  <p>
+                      <b>Введите свой email:</b>
+                      <input class="form-control" type="email" required name="Email" placeholder="test@mail.ru" />
+                  </p>
+
+                  <p><input class="btn btn-primary" type="submit" value="Отправить"></p>
+              </div>
+
+          </form>
+</div>

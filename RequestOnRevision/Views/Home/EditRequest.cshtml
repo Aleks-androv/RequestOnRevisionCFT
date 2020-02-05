@@ -1,0 +1,47 @@
+﻿@using RequestOnRevision.Models;
+@{
+    ViewBag.Title = "Редактирование заявки";
+}
+
+<h3>Редактирование заявки</h3>
+<form method="post" action="@Url.Action("CreateOrAddResult")">
+
+    <div class="form-group">
+        <input hidden name="RequestId" value="@ViewBag.Request.RequestId" />
+        <p>
+            <b>Название:</b>
+            <input class="form-control" type="text" required name="FieldName" placeholder="Название" maxlength="50" value="@ViewBag.Request.FieldName"/>
+        </p>
+        <p>
+            <b>Выберите приложение:</b>
+            <br /><select class="form-control" required name="ApplicationId">
+                @foreach (var value in ViewBag.Applications)
+                {
+                    if (value.ApplicationId == ViewBag.Request.ApplicationId)
+                    {
+                        <option value="@value.ApplicationId" selected>@value.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@value.ApplicationId">@value.Name</option>
+                    }
+                }
+                </select>
+        </p>
+        <p>
+             <b>Дата окончания разработки:</b>
+            <input class="form-control" type="date" min="2000-01-01" max="2100-01-01" required name="DevEndDate" value="@ViewBag.RequestDevEndDate" />
+        </p>
+        <p>
+            <b>Описание:</b>
+            <input class="form-control" type="text" required name="Description" placeholder="Подробное описание заявки" maxlength="100" value="@ViewBag.Request.Description" />
+        </p>
+        <p>
+            <b>Введите свой email:</b>
+            <input class="form-control" type="email" required name="Email" placeholder="test@mail.ru" value="@ViewBag.Request.Email"/>
+        </p>
+
+        <p><input class="btn btn-primary" type="submit" value="Отправить"></p>
+    </div>
+
+</form>

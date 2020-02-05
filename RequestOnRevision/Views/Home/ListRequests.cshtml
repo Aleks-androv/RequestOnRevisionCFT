@@ -1,0 +1,54 @@
+﻿@using RequestOnRevision.Models
+@model IndexViewModel
+@{
+    ViewBag.Title = "Список заявок";
+}
+<h3>Список заявок</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Приложение</th>
+            <th scope="col">Окончание разработки</th>
+            <th scope="col">Описание заявки</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var value in Model.Requests)
+        {
+            <tr>
+                <th scope="row">@value.RequestId</th>
+                <td>@value.FieldName</td>
+                <td>@value.ApplicationInfo.Name</td>
+                <td>@value.DevEndDate.ToShortDateString()</td>
+                <td>@value.Description</td>
+                <td>@value.Email</td>
+                <td><a href="/Home/EditRequest/@value.RequestId" class="badge badge-info">Изменить заявку</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a href="@Url.Action("ListRequests")" class="btn btn-outline-dark"><< На первую</a>
+}
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    var page = Model.PageViewModel.PageNumber - 1;
+    <a href="@Url.Action("ListRequests")?page=@page" class="btn btn-outline-dark">Назад</a>
+}
+
+@if (Model.PageViewModel.HasNextPage)
+{
+    var page = Model.PageViewModel.PageNumber + 1;
+    <a href="@Url.Action("ListRequests")?page=@page" class="btn btn-outline-dark">Вперёд</a>
+}
+
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a href="@Url.Action("ListRequests")?page=@Model.PageViewModel.TotalPages" class="btn btn-outline-dark">На последнюю >></a>
+}

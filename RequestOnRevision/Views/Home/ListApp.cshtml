@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Список приложений";
+}
+ 
+<h3>Список приложений</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название приложения</th>
+            <th scope="col">Команда разработки</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var value in ViewBag.Applications)
+        {
+            <tr>
+                <th scope="row">@value.ApplicationId</th>
+                <td>@value.Name</td>
+                <td>@value.DevTeam</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
